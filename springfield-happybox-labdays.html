@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Box GRATIS – Lab Days | Springfield2015 Ristofamily Fast Good</title>
+  <meta name="description" content="Dal martedì al giovedì la Happy Box è GRATIS con i Lab Days di Springfield2015! Panino o pizza baby, patatine, bibita, gadget, tovaglietta e accesso al parco giochi. Talsano, Taranto.">
+  <meta property="og:title"       content="Happy Box GRATIS – Lab Days Springfield2015">
+  <meta property="og:description" content="Ogni martedì, mercoledì e giovedì la Happy Box è inclusa gratis. Valore € 12,00.">
+  <meta property="og:image"       content="https://springfield2015.it/wp-content/uploads/2023/11/happy-box.jpg">
+  <meta property="og:url"         content="https://springfield2015.it">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+/* =============================================
+   Springfield2015 – Happy Box Lab Days Promo
+   css/style.css
+   ============================================= */
+
+/* ── DESIGN TOKENS ── */
+:root {
+  --sf-green:  #3DB54A;
+  --sf-yellow: #FFD200;
+  --sf-orange: #F7941D;
+  --sf-red:    #EE3124;
+  --sf-blue:   #1B75BC;
+  --sf-purple: #7B3FA0;
+  --sf-dark:   #1C1C2E;
+  --sf-cream:  #FFF9EE;
+  --sf-light:  #F4FAF5;
+  --white:     #FFFFFF;
+  --text:      #2B2B2B;
+}
+
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Quicksand', sans-serif;
+  background: var(--sf-cream);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp  { from { opacity: 0; transform: translateY(28px); }  to { opacity: 1; transform: translateY(0); } }
+@keyframes popIn   { from { opacity: 0; transform: scale(.6) rotate(-4deg); } to { opacity: 1; transform: scale(1) rotate(0); } }
+@keyframes wiggle  { 0%,100% { transform: rotate(-3deg) scale(1); }   50% { transform: rotate(3deg) scale(1.05); } }
+@keyframes pulse   { 0%,100% { transform: scale(1); }  50% { transform: scale(1.15); } }
+@keyframes floatUp { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity .65s ease, transform .65s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── CONFETTI CANVAS ── */
+#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
+
+/* ═══════════════════════════════════════
+   TOP NAV BAR
+═══════════════════════════════════════ */
+.topbar {
+  background: var(--sf-green);
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.topbar-logo img {
+  height: 48px;
+  filter: brightness(0) invert(1);
+}
+.topbar-info {
+  font-family: 'Baloo 2', cursive;
+  font-size: .85rem;
+  font-weight: 600;
+  color: rgba(255,255,255,.9);
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+.hero {
+  background: linear-gradient(160deg, var(--sf-green) 0%, #1a7a2a 55%, var(--sf-dark) 100%);
+  padding: 60px 24px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,.07) 2px, transparent 2px);
+  background-size: 36px 36px;
+  pointer-events: none;
+}
+.hero-wave { position: absolute; bottom: -2px; left: 0; right: 0; height: 60px; }
+.hero-wave svg { width: 100%; height: 100%; }
+
+.hero-tag {
+  display: inline-block;
+  background: rgba(255,255,255,.15);
+  border: 2px solid rgba(255,255,255,.4);
+  color: var(--white);
+  font-family: 'Baloo 2', cursive;
+  font-size: .9rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 22px;
+  border-radius: 999px;
+  margin-bottom: 24px;
+  animation: fadeUp .6s ease both;
+}
+
+h1 {
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(3.2rem, 10vw, 7rem);
+  font-weight: 800;
+  line-height: .9;
+  color: var(--sf-yellow);
+  text-shadow: 4px 5px 0 rgba(0,0,0,.25);
+  margin-bottom: 8px;
+  animation: popIn .65s cubic-bezier(.34,1.56,.64,1) .1s both;
+}
+h1 .white { color: var(--white); }
+
+.hero-subtitle {
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(1.1rem, 3.5vw, 1.7rem);
+  font-weight: 600;
+  color: rgba(255,255,255,.88);
+  margin: 16px 0 32px;
+  animation: fadeUp .6s ease .25s both;
+}
+
+.days-strip {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+  animation: fadeUp .6s ease .35s both;
+}
+.day-pill {
+  background: var(--sf-yellow);
+  color: var(--sf-dark);
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.1rem;
+  font-weight: 800;
+  padding: 10px 28px;
+  border-radius: 999px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.25);
+  transition: transform .2s;
+}
+.day-pill:hover { transform: scale(1.07) translateY(-3px); }
+.day-pill.mer   { background: var(--sf-orange); color: var(--white); }
+.day-pill.gio   { background: var(--sf-red);    color: var(--white); }
+
+.free-badge {
+  display: inline-block;
+  background: var(--white);
+  color: var(--sf-red);
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 800;
+  padding: 14px 44px;
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.3), inset 0 0 0 4px var(--sf-red);
+  animation: wiggle 2.5s ease-in-out infinite .8s;
+}
+.free-badge .value {
+  font-size: .38em;
+  font-weight: 700;
+  color: rgba(238,49,36,.7);
+  display: block;
+  margin-top: -4px;
+  letter-spacing: 1px;
+}
+
+/* ═══════════════════════════════════════
+   SHARED SECTION UTILITIES
+═══════════════════════════════════════ */
+.section { max-width: 960px; margin: 0 auto; padding: 70px 24px; }
+
+.section-eyebrow {
+  text-align: center;
+  font-family: 'Baloo 2', cursive;
+  font-size: .95rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--sf-green);
+  margin-bottom: 8px;
+}
+.section-title {
+  text-align: center;
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: var(--sf-dark);
+  margin-bottom: 12px;
+  line-height: 1.1;
+}
+.section-title .accent { color: var(--sf-green); }
+.section-title .acc2   { color: var(--sf-orange); }
+
+.section-sub {
+  text-align: center;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #666;
+  max-width: 580px;
+  margin: 0 auto 52px;
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════
+   HAPPY BOX SECTION
+═══════════════════════════════════════ */
+.hb-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.hb-image-wrap { position: relative; }
+.hb-image-wrap img {
+  width: 100%;
+  border-radius: 28px;
+  box-shadow: 0 24px 60px rgba(0,0,0,.18);
+  display: block;
+}
+.hb-badge-over {
+  position: absolute;
+  top: -16px; right: -16px;
+  background: var(--sf-red);
+  color: var(--white);
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.3rem;
+  font-weight: 800;
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.1;
+  box-shadow: 0 8px 24px rgba(238,49,36,.45);
+  animation: wiggle 2.5s ease-in-out infinite;
+}
+
+.hb-items { display: flex; flex-direction: column; gap: 18px; }
+
+.hb-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: var(--white);
+  border-radius: 18px;
+  padding: 18px 20px;
+  border-left: 5px solid var(--sf-green);
+  box-shadow: 0 4px 16px rgba(0,0,0,.07);
+  transition: transform .2s, box-shadow .2s;
+}
+.hb-item:hover { transform: translateX(6px); box-shadow: 0 8px 28px rgba(0,0,0,.12); }
+.hb-item:nth-child(2) { border-color: var(--sf-orange); }
+.hb-item:nth-child(3) { border-color: var(--sf-yellow); }
+.hb-item:nth-child(4) { border-color: var(--sf-purple); }
+.hb-item:nth-child(5) { border-color: var(--sf-blue);   }
+
+.hb-item-icon { font-size: 2.2rem; flex-shrink: 0; filter: drop-shadow(0 3px 6px rgba(0,0,0,.15)); }
+.hb-item-text h4 {
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--sf-dark);
+  margin-bottom: 2px;
+}
+.hb-item-text p { font-size: .9rem; font-weight: 600; color: #777; line-height: 1.4; }
+
+/* ═══════════════════════════════════════
+   LAB DAYS SECTION
+═══════════════════════════════════════ */
+.labdays-section {
+  background: linear-gradient(135deg, #1a3a6b 0%, #0f2447 100%);
+  padding: 80px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.labdays-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,.04) 2px, transparent 2px);
+  background-size: 40px 40px;
+}
+
+.lab-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+.lab-inner .section-eyebrow { color: var(--sf-yellow); }
+.lab-inner .section-title   { color: var(--white); }
+.lab-inner .section-sub     { color: rgba(255,255,255,.7); }
+
+.lab-time-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--sf-yellow);
+  color: var(--sf-dark);
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.4rem;
+  font-weight: 800;
+  padding: 12px 32px;
+  border-radius: 999px;
+  margin-bottom: 40px;
+  box-shadow: 0 8px 28px rgba(255,210,0,.35);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.lab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.lab-card {
+  background: rgba(255,255,255,.08);
+  border: 1.5px solid rgba(255,255,255,.15);
+  border-radius: 20px;
+  padding: 28px 16px 20px;
+  text-align: center;
+  transition: background .2s, transform .2s;
+  backdrop-filter: blur(6px);
+}
+.lab-card:hover { background: rgba(255,255,255,.15); transform: translateY(-6px); }
+.lab-card-icon  { font-size: 2.8rem; margin-bottom: 12px; display: block; }
+.lab-card h3    { font-family: 'Baloo 2', cursive; font-size: 1rem; font-weight: 800; color: var(--sf-yellow); margin-bottom: 6px; }
+.lab-card p     { font-size: .88rem; font-weight: 600; color: rgba(255,255,255,.7); line-height: 1.4; }
+
+.massimo-strip {
+  background: rgba(255,255,255,.1);
+  border: 2px solid var(--sf-yellow);
+  border-radius: 20px;
+  padding: 20px 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.massimo-strip .icon  { font-size: 2.5rem; }
+.massimo-strip div    { font-family: 'Baloo 2', cursive; font-weight: 700; color: var(--white); }
+.massimo-strip .label { font-size: .85rem; text-transform: uppercase; letter-spacing: 2px; color: var(--sf-yellow); }
+.massimo-strip .name  { font-size: 1.2rem; }
+
+/* ═══════════════════════════════════════
+   HOW IT WORKS – STEPS
+═══════════════════════════════════════ */
+.steps-section { background: var(--sf-light); padding: 72px 24px; }
+.steps-inner   { max-width: 960px; margin: 0 auto; }
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0;
+  position: relative;
+}
+.steps-grid::before {
+  content: '';
+  position: absolute;
+  top: 38px; left: 10%; right: 10%;
+  height: 3px;
+  background: repeating-linear-gradient(90deg, var(--sf-green) 0, var(--sf-green) 14px, transparent 14px, transparent 24px);
+  z-index: 0;
+}
+
+.step-card { text-align: center; padding: 0 16px; position: relative; z-index: 1; }
+.step-num {
+  width: 76px; height: 76px;
+  border-radius: 50%;
+  background: var(--sf-green);
+  color: var(--white);
+  font-family: 'Baloo 2', cursive;
+  font-size: 2rem; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+  box-shadow: 0 8px 28px rgba(61,181,74,.4);
+  border: 4px solid var(--white);
+  transition: transform .2s;
+}
+.step-card:hover .step-num { transform: scale(1.1); }
+.step-card:nth-child(2) .step-num { background: var(--sf-orange); box-shadow: 0 8px 28px rgba(247,148,29,.4); }
+.step-card:nth-child(3) .step-num { background: var(--sf-red);    box-shadow: 0 8px 28px rgba(238,49,36,.4); }
+.step-card:nth-child(4) .step-num { background: var(--sf-blue);   box-shadow: 0 8px 28px rgba(27,117,188,.4); }
+.step-card h4 { font-family: 'Baloo 2', cursive; font-size: 1.05rem; font-weight: 800; color: var(--sf-dark); margin-bottom: 8px; }
+.step-card p  { font-size: .9rem; font-weight: 600; color: #777; line-height: 1.5; }
+
+/* ═══════════════════════════════════════
+   PARENT BENEFIT BANNER
+═══════════════════════════════════════ */
+.parent-banner { background: var(--sf-yellow); padding: 48px 24px; text-align: center; }
+.parent-banner h2 {
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 800;
+  color: var(--sf-dark);
+  margin-bottom: 10px;
+}
+.parent-banner p { font-size: 1.1rem; font-weight: 600; color: rgba(28,28,46,.75); max-width: 560px; margin: 0 auto; line-height: 1.6; }
+
+/* ═══════════════════════════════════════
+   CTA FINAL
+═══════════════════════════════════════ */
+.cta-section {
+  background: linear-gradient(135deg, var(--sf-green) 0%, #1a7a2a 100%);
+  padding: 80px 24px 72px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: '🍔';
+  position: absolute; font-size: 260px; opacity: .05;
+  top: -40px; right: -30px; pointer-events: none;
+}
+.cta-section h2 {
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(2.2rem, 6vw, 3.8rem);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+.cta-section h2 span { color: var(--sf-yellow); }
+.cta-section p {
+  font-size: 1.1rem; font-weight: 600;
+  color: rgba(255,255,255,.82);
+  margin: 0 auto 36px;
+  max-width: 520px;
+  line-height: 1.6;
+}
+
+.btn-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 36px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.2rem; font-weight: 700;
+  padding: 16px 36px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: transform .15s, box-shadow .15s;
+  border: none; cursor: pointer;
+}
+.btn:hover { transform: translateY(-4px) scale(1.03); }
+.btn-yellow { background: var(--sf-yellow); color: var(--sf-dark); box-shadow: 0 10px 34px rgba(0,0,0,.25); }
+.btn-white  { background: rgba(255,255,255,.15); color: var(--white); border: 2.5px solid rgba(255,255,255,.6); box-shadow: 0 8px 24px rgba(0,0,0,.15); }
+
+.info-chips { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.info-chip  {
+  background: rgba(255,255,255,.15);
+  border: 1.5px solid rgba(255,255,255,.3);
+  border-radius: 999px;
+  padding: 8px 20px;
+  font-size: .9rem; font-weight: 700;
+  color: var(--white);
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer { background: var(--sf-dark); padding: 36px 24px; text-align: center; }
+.footer-logo img { height: 52px; margin-bottom: 14px; }
+footer p { font-size: .88rem; font-weight: 600; color: rgba(255,255,255,.45); line-height: 1.8; }
+footer a { color: var(--sf-yellow); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+.footer-tagline {
+  display: inline-block;
+  background: var(--sf-green);
+  color: var(--white);
+  font-family: 'Baloo 2', cursive;
+  font-size: .9rem; font-weight: 700;
+  padding: 6px 18px;
+  border-radius: 999px;
+  margin-top: 12px;
+}
+
+/* ═══════════════════════════════════════
+   FLOATING CTA BUTTON
+═══════════════════════════════════════ */
+.float-btn {
+  position: fixed;
+  bottom: 24px; right: 20px;
+  z-index: 200;
+  background: var(--sf-yellow);
+  color: var(--sf-dark);
+  font-family: 'Baloo 2', cursive;
+  font-size: .95rem; font-weight: 800;
+  padding: 12px 18px;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0,0,0,.3);
+  cursor: pointer;
+  text-align: center;
+  line-height: 1.25;
+  text-decoration: none;
+  animation: floatUp 3s ease-in-out infinite;
+  border: 3px solid var(--sf-green);
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 680px) {
+  .hb-split { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .steps-grid::before { display: none; }
+}
+@media (max-width: 480px) {
+  .topbar           { justify-content: center; }
+  .topbar-info      { justify-content: center; font-size: .78rem; }
+  .hb-split         { gap: 32px; }
+  .free-badge       { padding: 12px 28px; }
+  .cta-section      { padding: 56px 20px 52px; }
+}
+  </style>
+</head>
+<body>
+
+  <canvas id="confetti" aria-hidden="true"></canvas>
+
+  <nav class="topbar">
+    <div class="topbar-logo">
+      <img src="https://springfield2015.it/wp-content/uploads/2023/03/logo_springfield2.png" alt="Springfield2015 Ristofamily Fast Good" onerror="this.style.display='none'">
+    </div>
+    <div class="topbar-info">
+      <span>📍 Via Cacace 298/c, Talsano</span>
+      <span>📞 392 693 8936</span>
+      <span>🕔 Aperti dalle 17:30</span>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-tag">🎉 Promozione Lab Days · Mar · Mer · Gio</div>
+    <h1><span class="white">HAPPY</span><br>BOX<br><span class="white">GRATIS!</span></h1>
+    <p class="hero-subtitle">Ogni martedì, mercoledì e giovedì sera<br>per i tuoi bambini durante i Lab Days 🎨</p>
+    <div class="days-strip">
+      <div class="day-pill">⭐ Martedì</div>
+      <div class="day-pill mer">🎨 Mercoledì</div>
+      <div class="day-pill gio">✂️ Giovedì</div>
+    </div>
+    <div class="free-badge">GRATIS!<span class="value">Valore € 12,00</span></div>
+    <div class="hero-wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#FFF9EE"/>
+      </svg>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="hb-title">
+    <p class="section-eyebrow">La tua sorpresa della serata</p>
+    <h2 class="section-title" id="hb-title">Cos'è la <span class="accent">Happy Box</span>?</h2>
+    <p class="section-sub">Lo speciale kit pensato per i più piccoli: senza interrompere il gioco, arriva tutto il gusto di Springfield!</p>
+    <div class="hb-split reveal">
+      <div class="hb-image-wrap">
+        <img src="https://springfield2015.it/wp-content/uploads/2023/11/happy-box.jpg" alt="Happy Box Springfield2015" loading="lazy">
+        <div class="hb-badge-over" aria-hidden="true">🎁<br>GRATIS</div>
+      </div>
+      <div class="hb-items">
+        <div class="hb-item"><div class="hb-item-icon" aria-hidden="true">🍔</div><div class="hb-item-text"><h4>Panino o Pizza Baby</h4><p>Scegli tra il nostro hamburger o la pizzetta baby, preparati al momento</p></div></div>
+        <div class="hb-item"><div class="hb-item-icon" aria-hidden="true">🍟</div><div class="hb-item-text"><h4>Patatine</h4><p>Croccanti e dorate, la combo perfetta per i piccoli</p></div></div>
+        <div class="hb-item"><div class="hb-item-icon" aria-hidden="true">🥤</div><div class="hb-item-text"><h4>Bibita Piccola</h4><p>La bevanda preferita inclusa nel kit</p></div></div>
+        <div class="hb-item"><div class="hb-item-icon" aria-hidden="true">🎁</div><div class="hb-item-text"><h4>Gadget + Tovaglietta</h4><p>Un gadget a sorpresa e la tovaglietta da colorare con i propri personaggi</p></div></div>
+        <div class="hb-item"><div class="hb-item-icon" aria-hidden="true">🛝</div><div class="hb-item-text"><h4>Accesso Area Giochi + Ingresso Evento</h4><p>Parco giochi libero e accesso incluso al Lab Day della serata</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="labdays-section" aria-labelledby="lab-title">
+    <div class="lab-inner">
+      <p class="section-eyebrow reveal">Dal Martedì al Giovedì</p>
+      <h2 class="section-title reveal" id="lab-title">I <span style="color:var(--sf-yellow)">Lab Days</span><br>arrivano di sera!</h2>
+      <p class="section-sub reveal">Springfield si trasforma in un laboratorio creativo. I bambini imparano, esplorano e si divertono sotto la guida esperta dei nostri animatori. Tu ceni in pace. Perfetto, no?</p>
+      <div style="text-align:center;margin-bottom:40px;" class="reveal">
+        <div class="lab-time-chip">📅 Martedì · Mercoledì · Giovedì dalle 19:30</div>
+      </div>
+      <div class="lab-grid reveal">
+        <div class="lab-card"><span class="lab-card-icon" aria-hidden="true">✂️</span><h3>Attività Manuali</h3><p>Ritaglio, incolla e costruzione creativa per ogni età</p></div>
+        <div class="lab-card"><span class="lab-card-icon" aria-hidden="true">🖌️</span><h3>Pittura &amp; Arte</h3><p>Pennelli, colori e tanta libertà espressiva</p></div>
+        <div class="lab-card"><span class="lab-card-icon" aria-hidden="true">🧪</span><h3>Lab Didattici</h3><p>Esperimenti e scoperte per i piccoli curiosi</p></div>
+        <div class="lab-card"><span class="lab-card-icon" aria-hidden="true">🎭</span><h3>Giochi di Ruolo</h3><p>Storie, travestimenti e tantissima fantasia</p></div>
+        <div class="lab-card"><span class="lab-card-icon" aria-hidden="true">🛝</span><h3>Playground Libero</h3><p>Il parco giochi interno aperto per tutta la serata</p></div>
+      </div>
+      <div class="massimo-strip reveal">
+        <span class="icon" aria-hidden="true">🎪</span>
+        <div><div class="label">Animazione a cura di</div><div class="name">Massimo Animazione – professionisti del divertimento</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="steps-section" aria-labelledby="steps-title">
+    <div class="steps-inner">
+      <p class="section-eyebrow" style="text-align:center;">Semplicissimo</p>
+      <h2 class="section-title reveal" id="steps-title">Come <span class="acc2">funziona</span>?</h2>
+      <div class="steps-grid reveal">
+        <div class="step-card"><div class="step-num">1</div><h4>Vieni a cena</h4><p>Martedì, mercoledì o giovedì dalle 19:30</p></div>
+        <div class="step-card"><div class="step-num">2</div><h4>Ordina il tuo pasto</h4><p>Scegli la tua Combo, pizza o panino preferito</p></div>
+        <div class="step-card"><div class="step-num">3</div><h4>Happy Box inclusa!</h4><p>Ricevi gratis la Happy Box per ogni bambino</p></div>
+        <div class="step-card"><div class="step-num">4</div><h4>Cena rilassato 😌</h4><p>I bimbi al Lab Day, tu gusti in totale serenità</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="parent-banner reveal">
+    <h2>👨‍👩‍👧 Tu degusta e ti rilassi.<br>Tuo figlio mangia e si diverte.</h2>
+    <p>Non siamo un fast food. Non siamo un ristorante normale.<br>Siamo il primo <strong>Risto Play</strong> d'Italia — dove il gusto incontra il divertimento.</p>
+  </div>
+
+  <section class="cta-section" aria-labelledby="cta-title">
+    <h2 id="cta-title">Prenota il tuo tavolo<br>per i <span>Lab Days!</span> 🎉</h2>
+    <p>1 Happy Box gratis per ogni bambino, ogni martedì, mercoledì e giovedì sera.<br>Posti limitati – prenota adesso!</p>
+    <div class="btn-group">
+      <a href="tel:3926938936" class="btn btn-yellow">📞 Chiama: 392 693 8936</a>
+      <a href="https://www.springfield2015.it/prenota/" target="_blank" rel="noopener" class="btn btn-white">🌐 Prenota Online</a>
+    </div>
+    <div class="info-chips">
+      <div class="info-chip">📍 Via Cacace 298/c, Talsano</div>
+      <div class="info-chip">🕖 Lab Days dalle 19:30</div>
+      <div class="info-chip">📅 Mar · Mer · Gio</div>
+      <div class="info-chip">🎁 1 Happy Box gratis a bimbo</div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">
+      <img src="https://springfield2015.it/wp-content/uploads/2023/03/logo_spring_footer.png" alt="Springfield2015 Ristofamily" onerror="this.style.display='none'">
+    </div>
+    <p>
+      <a href="https://www.springfield2015.it">springfield2015.it</a> · Via Cacace 298/c Talsano, Taranto<br>
+      ✉️ <a href="mailto:info@springfield2015.it">info@springfield2015.it</a> · 📞 <a href="tel:3926938936">392 693 8936</a><br>
+      Aperti tutti i giorni dalle 17:30 · Domenica anche a pranzo dalle 10:30
+    </p>
+    <div class="footer-tagline">🔵 Risto Play – Dove il gusto incontra il divertimento</div>
+  </footer>
+
+  <a href="tel:3926938936" class="float-btn" aria-label="Chiama ora per la Happy Box gratis">
+    🎁 Happy Box<br>GRATIS!<br>Chiama ora
+  </a>
+
+  <script>
+/* =============================================
+   Springfield2015 – Happy Box Lab Days Promo
+   js/main.js
+   ============================================= */
+
+/* ─────────────────────────────────────────────
+   CONFETTI on page load
+───────────────────────────────────────────── */
+(function initConfetti() {
+  const canvas = document.getElementById('confetti');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const COLORS = [
+    '#3DB54A', // sf-green
+    '#FFD200', // sf-yellow
+    '#F7941D', // sf-orange
+    '#EE3124', // sf-red
+    '#1B75BC', // sf-blue
+    '#7B3FA0', // sf-purple
+    '#FFFFFF'
+  ];
+
+  const pieces = Array.from({ length: 90 }, () => ({
+    x:     Math.random() * canvas.width,
+    y:     -30 - Math.random() * canvas.height * 0.5,
+    w:     Math.random() * 14 + 6,
+    h:     Math.random() * 7  + 4,
+    r:     Math.random() * Math.PI * 2,
+    vy:    Math.random() * 3  + 1.5,
+    vx:    (Math.random() - 0.5) * 2,
+    vr:    (Math.random() - 0.5) * 0.12,
+    color: COLORS[Math.floor(Math.random() * COLORS.length)],
+    alpha: 1,
+    shape: Math.random() > 0.5 ? 'rect' : 'circle'
+  }));
+
+  let frame = 0;
+
+  function loop() {
+    frame++;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (frame > 320) return;
+
+    pieces.forEach(p => {
+      p.y += p.vy;
+      p.x += p.vx;
+      p.r += p.vr;
+
+      // Fade out after frame 200
+      if (frame > 200) {
+        p.alpha = Math.max(0, 1 - (frame - 200) / 120);
+      }
+
+      ctx.save();
+      ctx.globalAlpha = p.alpha;
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.r);
+      ctx.fillStyle = p.color;
+
+      if (p.shape === 'circle') {
+        ctx.beginPath();
+        ctx.arc(0, 0, p.w / 2, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      }
+
+      ctx.restore();
+    });
+
+    requestAnimationFrame(loop);
+  }
+
+  // Small delay so the page renders first
+  setTimeout(loop, 300);
+})();
+
+/* ─────────────────────────────────────────────
+   SCROLL REVEAL
+   Elements with class .reveal animate in when
+   they enter the viewport.
+───────────────────────────────────────────── */
+(function initScrollReveal() {
+  const elements = document.querySelectorAll('.reveal');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        // Stagger siblings slightly
+        const delay = i * 70;
+        setTimeout(() => entry.target.classList.add('visible'), delay);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  elements.forEach(el => observer.observe(el));
+})();
+
+/* ─────────────────────────────────────────────
+   FLOATING BUTTON – smooth scroll to CTA
+───────────────────────────────────────────── */
+(function initFloatBtn() {
+  const btn = document.querySelector('.float-btn');
+  if (!btn) return;
+
+  // On desktop the button already uses href=tel:
+  // On wider screens we can also scroll to CTA if preferred.
+  // Uncomment the block below to override with scroll behaviour:
+
+  /*
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const cta = document.querySelector('.cta-section');
+    if (cta) cta.scrollIntoView({ behavior: 'smooth' });
+  });
+  */
+})();
+  </script>
+</body>
+</html>
